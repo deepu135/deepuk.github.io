@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Crafting the Web with Deepu</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #121212;
+      color: #fff;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      padding: 3rem 1rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      color: #00ffe1;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #00ffe1; }
+      to { text-shadow: 0 0 20px #00ffe1, 0 0 30px #00ffe1; }
+    }
+
+    header .role {
+      font-size: 1.1rem;
+      color: #ccc;
+      margin-top: 0.3rem;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      list-style: none;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 14px;
+      border: 1px solid transparent;
+      border-radius: 5px;
+      transition: all 0.3s;
+    }
+
+    nav a:hover {
+      background: #00ffe1;
+      color: #000;
+      border-color: #00ffe1;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      color: #00ffe1;
+      text-align: center;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      width: 80px;
+      height: 3px;
+      background: #00ffe1;
+      display: block;
+      margin: 0.5rem auto 0;
+      border-radius: 2px;
+    }
+
+    #about p {
+      font-size: 1.1rem;
+      text-align: center;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    #studies ul {
+      list-style: none;
+      padding-left: 0;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    #studies li {
+      background: #1e1e1e;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 5px #000;
+    }
+
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .skill-card {
+      background: #1f1f1f;
+      padding: 1.2rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,255,225,0.1);
+      transition: transform 0.3s;
+      min-width: 120px;
+      text-align: center;
+    }
+
+    .skill-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00ffe1;
+    }
+
+    .projects-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: #000000;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: scale(1.02);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .project-card h3 {
+      padding: 10px;
+      margin: 0;
+    }
+
+    .project-card p {
+      padding: 0 10px 15px;
+    }
+
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    input, textarea {
+      padding: 0.8rem;
+      border: none;
+      border-radius: 5px;
+      background: #1f1f1f;
+      color: white;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #00ffe1;
+      color: #000;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #00cccc;
+    }
+
+    footer {
+      text-align: center;
+      background: #111;
+      padding: 1rem;
+      font-size: 0.9rem;
+      margin-top: 3rem;
+    }
+
+    #toggle-dark {
+      background: none;
+      border: 2px solid #00ffe1;
+      color: #00ffe1;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    #toggle-dark:hover {
+      background: #00ffe1;
+      color: #000;
+    }
+
+    .dark-mode {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    .dark-mode header,
+    .dark-mode footer {
+      background: #f1f1f1;
+    }
+
+    .dark-mode nav a {
+      color: #000;
+    }
+
+    .dark-mode .skill-card {
+      background: #e1e1e1;
+    }
+
+    .dark-mode input,
+    .dark-mode textarea {
+      background: #f0f0f0;
+      color: #000;
+    }
+
+    .dark-mode #toggle-dark {
+      color: #000;
+      border-color: #000;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Crafting the Web with <span>Deepu</span></h1>
+    <p class="role">Web Designer</p>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#studies">Studies</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><button id="toggle-dark">Toggle Mode</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about">
+      <h2>About Me</h2>
+      <p>Hello! I’m Deepu, a creative web designer passionate about designing beautiful, functional, and user-centric websites. I turn ideas into reality using code and creativity.</p>
+    </section>
+
+    <section id="studies">
+      <h2>My Studies</h2>
+      <ul>
+        <li><strong>BCA</strong> – Kurukshetra University</li>
+        <li><strong>12th</strong> – Haryana Board of School Education</li>
+        <li><strong>10th</strong> – Haryana Board of School Education</li>
+      </ul>
+    </section>
+
+    <section id="skills">
+      <h2>My Skills</h2>
+      <div class="skills-container">
+        <div class="skill-card">HTML</div>
+        <div class="skill-card">CSS</div>
+        <div class="skill-card">JavaScript</div>
+        <div class="skill-card">Responsive Design</div>
+        <div class="skill-card">UI/UX Basics</div>
+        <div class="skill-card">Git & GitHub</div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>My Projects</h2>
+<div class="projects-container">
+  <div class="project-card">
+<img src="C:\Users\DIPU KUMAR\Downloads\pexels-esmihel-18311093.jpg" alt="Blog">
+        <h3>Typing Game</h3>
+    <a href="https://deepu135.github.io/typinggame/" target="_blank"> View Game</a>
+</div>
+      <div class="project-card">
+<img src="C:\Users\DIPU KUMAR\Downloads\pexels-nikola-tomasic-58494762-30956958.jpg" alt="Blog">
+        <h3>Ball Game</h3>
+         <a href="https://deepu135.github.io/ball.game/" target="_blank"> View game</a>
+        
+      </div>
+      <div class="project-card">
+        <img src="C:\Users\DIPU KUMAR\Downloads\pexels-artyusufpatel-8998295.jpg" alt="Blog">
+        <h3>Tech Blog</h3>
+      </div>
+    </div>
+
+    </section>
+
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <form>
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
+        <textarea placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Deepu | All rights reserved</p>
+  </footer>
+
+  <script>
+    document.getElementById('toggle-dark').addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+  </script>
+</body>
+</html>
